@@ -2,6 +2,8 @@
 
 本机自用的 **DSH（DeepSeek Harness）插件集合**。每个插件一个独立仓库，这里是索引：目录、功能介绍、安装方式和当前版本。
 
+> **本仓库不是插件**：它没有 `package.json`，也没有 `dsh.bundle.patch`，只是索引页。真正的插件在下面表格里各自独立的仓库中，请从那些仓库安装。
+
 > 所有插件都是 bundle 形态（`package.json` 的 `dsh.bundle.patch` 指向 `cordis.patch.yml`），通过 `dsh plugin add` 或 profile 的 `pnpm` 依赖安装。**仓库里不放任何密钥**。
 
 ## 插件一览
