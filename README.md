@@ -14,6 +14,8 @@
 
 机器可读的清单见 [`plugins.json`](plugins.json)。
 
+> **当前安装方式**：三个插件都已切换为 GitHub 远程引用（pnpm 的 git 依赖），本机不再保留链接安装的源码目录。需要改代码时用 `~/DeepSeekHarness/<插件名>` 里的 clone，改完 push，再在 profile 里 `pnpm update <插件名>`。
+
 ## 自动化任务
 
 不属于插件，是「到点让 agent 做一件事」的定时任务，单独放在 **[dsh-automation](https://github.com/zhengshupei-dshhub/dsh-automation)**（每个任务一个目录 + 提示词原文）。
