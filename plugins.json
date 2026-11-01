@@ -1,0 +1,54 @@
+{
+  "$comment": "DSH 插件目录的机器可读清单。插件发版后同步更新这里和 README。",
+  "updatedAt": "2026-11-01",
+  "plugins": [
+    {
+      "name": "dsh-memory",
+      "repo": "https://github.com/zhengshupei-dshhub/dsh-memory",
+      "install": "git+https://github.com/zhengshupei-dshhub/dsh-memory.git",
+      "version": "0.2.5",
+      "summary": "本机长期记忆 + 人设养成 + 自我迭代台账",
+      "dataDir": "~/.dsh/memory",
+      "requiresBuild": false,
+      "tools": [
+        "memory_save",
+        "memory_search",
+        "memory_forget",
+        "memory_recall",
+        "persona_read",
+        "persona_grow",
+        "persona_diary",
+        "evolution_note",
+        "evolution_list",
+        "evolution_log"
+      ]
+    },
+    {
+      "name": "dsh-dafeiyu",
+      "repo": "https://github.com/zhengshupei-dshhub/dsh-dafeiyu",
+      "install": "git+https://github.com/zhengshupei-dshhub/dsh-dafeiyu.git",
+      "version": "0.1.28-local.1",
+      "summary": "桌面大肥鱼：人设联动、桌面对话、季节皮肤",
+      "dataDir": "~/.dsh/dsh-dafeiyu",
+      "requiresBuild": true,
+      "build": "bash native/macos/build.sh",
+      "platforms": ["darwin"],
+      "tools": []
+    },
+    {
+      "name": "dsh-doubao",
+      "repo": "https://github.com/zhengshupei-dshhub/dsh-doubao",
+      "install": "git+https://github.com/zhengshupei-dshhub/dsh-doubao.git",
+      "version": "0.1.5",
+      "summary": "豆包（火山方舟）感官：看图、出图、视频",
+      "dataDir": "~/.dsh/doubao.json",
+      "requiresBuild": false,
+      "tools": [
+        "doubao_status",
+        "doubao_see",
+        "doubao_draw",
+        "doubao_video"
+      ]
+    }
+  ]
+}
