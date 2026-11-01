@@ -113,3 +113,4 @@ pnpm install
 |---|---|
 | 2026-11-01 | 目录建立：收录 dsh-memory、dsh-dafeiyu、dsh-doubao |
 | 2026-11-01 | 新增「自动化任务」一节，指向 dsh-automation（签到 + 自我进化） |
+| 2026-11-01 | 自动化新增「记忆数据备份」（私有仓库 dsh-memory-data） |
