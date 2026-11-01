@@ -14,6 +14,17 @@
 
 机器可读的清单见 [`plugins.json`](plugins.json)。
 
+## 自动化任务
+
+不属于插件，是「到点让 agent 做一件事」的定时任务，单独放在 **[dsh-automation](https://github.com/zhengshupei-dshhub/dsh-automation)**（每个任务一个目录 + 提示词原文）。
+
+| 任务 | 触发 | 类型 | 一句话 |
+|---|---|---|---|
+| **WorkBuddy 签到 + 礼包** | 每天 09:10 | 脚本 | 领每日签到（约 100/天）与礼包/补偿 |
+| **空闲自我进化** | 每天 22:00 | 提示词 | 没有任务时自己推进一项改进 |
+
+> 自动化任务依赖 DSH 常驻运行；应用退出就不会触发。
+
 ---
 
 ## dsh-memory
@@ -92,6 +103,7 @@ pnpm install
 
 - **新增插件**：建独立仓库 → 在本页「插件一览」加一行 → 在下面补一节功能介绍 → 更新 `plugins.json`
 - **插件更新**：版本号、功能变化同步回本仓库，保证目录和实际代码一致
+- **新增自动化任务**：放到 [dsh-automation](https://github.com/zhengshupei-dshhub/dsh-automation) → 在本页「自动化任务」表格加一行
 - 不收录：密钥、token、运行时数据、构建产物
 
 ## 版本记录
@@ -99,3 +111,4 @@ pnpm install
 | 日期 | 变更 |
 |---|---|
 | 2026-11-01 | 目录建立：收录 dsh-memory、dsh-dafeiyu、dsh-doubao |
+| 2026-11-01 | 新增「自动化任务」一节，指向 dsh-automation（签到 + 自我进化） |
