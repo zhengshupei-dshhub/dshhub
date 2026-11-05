@@ -1,8 +1,8 @@
 # dshhub · DeepSeek Harness 插件目录
 
-本机自用的 **DSH（DeepSeek Harness）插件集合**。每个插件一个独立仓库，这里是索引：目录、功能介绍、安装方式和当前版本。
+一组开源给 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 用的插件。每个插件一个独立仓库，这里是索引：目录、功能介绍、安装方式和当前版本。
 
-> **本仓库不是插件**：它没有 `package.json`，也没有 `dsh.bundle.patch`，只是索引页。真正的插件在下面表格里各自独立的仓库中，请从那些仓库安装。
+> **本仓库不是插件**：它没有 `package.json` 和 `dsh.bundle.patch`，只是索引页。真正的插件在下面表格里各自独立的仓库中，请从那些仓库安装。
 
 > 所有插件都是 bundle 形态（`package.json` 的 `dsh.bundle.patch` 指向 `cordis.patch.yml`），通过 `dsh plugin add` 或 profile 的 `pnpm` 依赖安装。**仓库里不放任何密钥**。
 
@@ -10,13 +10,12 @@
 
 | 插件 | 仓库 | 当前版本 | 一句话 |
 |---|---|---|---|
-| **dsh-memory** | [zhengshupei-dshhub/dsh-memory](https://github.com/zhengshupei-dshhub/dsh-memory) | `0.2.5` | 本机长期记忆 + 人设养成 + 自我迭代台账 |
-| **dsh-dafeiyu** | [zhengshupei-dshhub/dsh-dafeiyu](https://github.com/zhengshupei-dshhub/dsh-dafeiyu) | `0.1.28-local.1` | 桌面大肥鱼：人设联动、桌面对话、季节皮肤 |
+| **dsh-model-router** | [zhengshupei-dshhub/dsh-model-router](https://github.com/zhengshupei-dshhub/dsh-model-router) | `2.3.0` | 开局选模型：零配置自动探测模型能力，按任务切换 |
+| **dsh-memory** | [zhengshupei-dshhub/dsh-memory](https://github.com/zhengshupei-dshhub/dsh-memory) | `0.2.6` | 长期记忆 + 人设养成 + 自我迭代台账 |
+| **dsh-dafeiyu** | [zhengshupei-dshhub/dsh-dafeiyu](https://github.com/zhengshupei-dshhub/dsh-dafeiyu) | `0.1.32-local.1` | 桌面伴侣：人设联动、桌面对话、季节皮肤（macOS） |
 | **dsh-doubao** | [zhengshupei-dshhub/dsh-doubao](https://github.com/zhengshupei-dshhub/dsh-doubao) | `0.1.5` | 豆包（火山方舟）感官：看图、出图、视频 |
 
 机器可读的清单见 [`plugins.json`](plugins.json)。
-
-> **当前安装方式**：三个插件都已切换为 GitHub 远程引用（pnpm 的 git 依赖），本机不再保留链接安装的源码目录。需要改代码时用 `~/DeepSeekHarness/<插件名>` 里的 clone，改完 push，再在 profile 里 `pnpm update <插件名>`。
 
 ## 自动化任务
 
@@ -24,17 +23,30 @@
 
 | 任务 | 触发 | 类型 | 一句话 |
 |---|---|---|---|
-| **WorkBuddy 签到 + 礼包** | 每天 09:10 | 脚本 | 领每日签到（约 100/天）与礼包/补偿 |
-| **空闲自我进化** | 每天 22:00 | 提示词 | 没有任务时自己推进一项改进 |
-| **记忆数据备份** | 每天 23:50 | 脚本 | 记忆/人设/台账推到私有仓库 [dsh-memory-data](https://github.com/zhengshupei-dshhub/dsh-memory-data) |
+| WorkBuddy 签到 + 礼包 | 每天 09:10 | 脚本 | 领每日签到与礼包/补偿 |
+| 空闲自我进化 | 每天 12:00 | 提示词 | 没有任务时自己推进一项改进 |
+| 记忆数据备份 | 每天 23:50 | 脚本 | 记忆/人设/台账推送到私有仓库 |
 
 > 自动化任务依赖 DSH 常驻运行；应用退出就不会触发。
 
 ---
 
+## dsh-model-router
+
+**开局选模型：按任务关键词自动把当前会话切到最合适的模型。** 零配置可用——启动时扫描运行时所有 provider 与模型，按名字和输入模态识别能力（vision / code / pro / mini…），据此建立映射。
+
+- 带图片/附件 → 视觉模型；超长文本 → 长上下文模型
+- 每轮判断但目标不变不写入，不打扰手动选择
+- 需要时可用 `provider` / `models` 精确指定，或配 `fallback` 做失败兜底
+- 详见 [README](https://github.com/zhengshupei-dshhub/dsh-model-router)
+
+```bash
+dsh plugin --profile <你的 profile> add git+https://github.com/zhengshupei-dshhub/dsh-model-router.git
+```
+
 ## dsh-memory
 
-**本机长期记忆 + 人设养成 + 自我迭代台账。** 压缩注定有损，记忆可以无损——它把值得记住的事实、偏好、坑存成 JSON，跨会话检索；还管着「我是谁」和「要改什么」。
+**长期记忆 + 人设养成 + 自我迭代台账。** 压缩注定有损，记忆可以无损——它把值得记住的事实、偏好、坑存成 JSON，跨会话检索。
 
 | 能力 | 工具 |
 |---|---|
@@ -45,25 +57,22 @@
 
 - 数据：`~/.dsh/memory/`（`memories.json`、`persona.json`、`evolution/*.jsonl`）
 - 依赖：零第三方依赖，只用 Node 内置模块
-- 安装：
 
 ```bash
-dsh plugin --profile desktop add git+https://github.com/zhengshupei-dshhub/dsh-memory.git
+dsh plugin --profile <你的 profile> add git+https://github.com/zhengshupei-dshhub/dsh-memory.git
 ```
 
 ## dsh-dafeiyu
 
-**桌面大肥鱼伴侣。** 透明置顶窗口，跟着 DSH 的任务状态变化；本地分支在原生桌宠之外加了人设联动和桌面对话。
+**桌面伴侣。** 透明置顶窗口，跟着 DSH 的任务状态变化；本地分支在原生桌宠之外加了人设联动和桌面对话。
 
 - 人设联动：读 `persona.json`，人设成长 / 写日记 / 换天时冒气泡；空闲久了会自己说一句
 - 桌面对话：右键菜单直接跟它说话，回复走 `agent.followup` 回显在气泡里
-- 季节皮肤：`lookTheme` / `lookIntensity`，按月份切换柔光与飘落粒子，**不改精灵图**，可一键关闭
-- 动作表现：按气泡内容触发歪头 / 蔫一下 / 弹跳 / 说话抖动
+- 季节皮肤：`lookTheme` / `lookIntensity`，按月份切换柔光与飘落粒子，不改精灵图，可一键关闭
 - 平台：macOS（原生 Helper）；Windows/Linux 走上游的 Python 路径
-- 安装：
 
 ```bash
-dsh plugin --profile desktop add git+https://github.com/zhengshupei-dshhub/dsh-dafeiyu.git
+dsh plugin --profile <你的 profile> add git+https://github.com/zhengshupei-dshhub/dsh-dafeiyu.git
 # 仓库不含预编译 Helper，装完需要构建一次（macOS）：
 cd "$(dirname "$(node -p "require.resolve('dsh-dafeiyu/package.json')")")" && bash native/macos/build.sh
 ```
@@ -80,11 +89,10 @@ cd "$(dirname "$(node -p "require.resolve('dsh-dafeiyu/package.json')")")" && ba
 | `doubao_video` | Seedance 文生 / 图生视频，异步轮询后落 mp4 |
 
 - Key：`~/.dsh/doubao.json`（权限 600，不入库）
-- 输出：默认 `~/DeepSeekHarness/BigFish/doubao-output/`，可用 `outputDir` 覆盖
-- 安装：
+- 输出：默认 `doubao-output/`，可用 `outputDir` 覆盖
 
 ```bash
-dsh plugin --profile desktop add git+https://github.com/zhengshupei-dshhub/dsh-doubao.git
+dsh plugin --profile <你的 profile> add git+https://github.com/zhengshupei-dshhub/dsh-doubao.git
 ```
 
 ---
@@ -92,17 +100,14 @@ dsh plugin --profile desktop add git+https://github.com/zhengshupei-dshhub/dsh-d
 ## 安装通用说明
 
 ```bash
-# 国内网络拉 GitHub 需要代理
-export HTTPS_PROXY=http://127.0.0.1:7897
+# 装某个插件（把 <你的 profile> 换成实际 profile 名）
+dsh plugin --profile <你的 profile> add git+https://github.com/zhengshupei-dshhub/<仓库>.git
 
-# 装某个插件（以 profile desktop 为例）
-dsh plugin --profile desktop add git+https://github.com/zhengshupei-dshhub/<仓库>.git
-
-# 或写进 ~/.dsh/profiles/desktop/package.json 后
+# 或写进 ~/.dsh/profiles/<你的 profile>/package.json 后
 pnpm install
 ```
 
-装完确认 `dsh.profile.bundles` 里有对应名字，重启 DSH 生效。
+装完确认 `dsh.profile.bundles` 里有对应名字，重启 DSH 生效。插件各自的额外步骤（如 dsh-dafeiyu 需要构建 Helper）见上面分节。
 
 ## 维护约定
 
@@ -116,5 +121,6 @@ pnpm install
 | 日期 | 变更 |
 |---|---|
 | 2026-11-01 | 目录建立：收录 dsh-memory、dsh-dafeiyu、dsh-doubao |
-| 2026-11-01 | 新增「自动化任务」一节，指向 dsh-automation（签到 + 自我进化） |
-| 2026-11-01 | 自动化新增「记忆数据备份」（私有仓库 dsh-memory-data） |
+| 2026-11-01 | 新增「自动化任务」一节，指向 dsh-automation |
+| 2026-11-01 | 自动化新增「记忆数据备份」 |
+| 2026-11-05 | 收录 dsh-model-router；版本更新；README 去除本机专属路径与代理配置 |

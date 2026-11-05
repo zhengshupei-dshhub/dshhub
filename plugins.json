@@ -1,13 +1,23 @@
 {
   "$comment": "DSH 插件目录的机器可读清单。插件发版后同步更新这里和 README。",
-  "updatedAt": "2026-11-01",
+  "updatedAt": "2026-11-05",
   "plugins": [
+    {
+      "name": "dsh-model-router",
+      "repo": "https://github.com/zhengshupei-dshhub/dsh-model-router",
+      "install": "git+https://github.com/zhengshupei-dshhub/dsh-model-router.git",
+      "version": "2.3.0",
+      "summary": "开局选模型：零配置自动探测模型能力，按任务关键词切换最合适的模型",
+      "dataDir": null,
+      "requiresBuild": false,
+      "tools": []
+    },
     {
       "name": "dsh-memory",
       "repo": "https://github.com/zhengshupei-dshhub/dsh-memory",
       "install": "git+https://github.com/zhengshupei-dshhub/dsh-memory.git",
-      "version": "0.2.5",
-      "summary": "本机长期记忆 + 人设养成 + 自我迭代台账",
+      "version": "0.2.6",
+      "summary": "长期记忆 + 人设养成 + 自我迭代台账",
       "dataDir": "~/.dsh/memory",
       "requiresBuild": false,
       "tools": [
@@ -27,8 +37,8 @@
       "name": "dsh-dafeiyu",
       "repo": "https://github.com/zhengshupei-dshhub/dsh-dafeiyu",
       "install": "git+https://github.com/zhengshupei-dshhub/dsh-dafeiyu.git",
-      "version": "0.1.28-local.1",
-      "summary": "桌面大肥鱼：人设联动、桌面对话、季节皮肤",
+      "version": "0.1.32-local.1",
+      "summary": "桌面伴侣：人设联动、桌面对话、季节皮肤（macOS）",
       "dataDir": "~/.dsh/dsh-dafeiyu",
       "requiresBuild": true,
       "build": "bash native/macos/build.sh",
